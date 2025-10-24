@@ -11,7 +11,7 @@ const app = express();
 
 // app.use(cors());
 app.use(cors({
-  origin: ['https://red2roast.shop', 'https://www.red2roast.shop', 'http://localhost:5173'],
+  origin: ['http://red2roast.shop', 'http://www.red2roast.shop', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Add PATCH if you use it for updates
   allowedHeaders: ['Content-Type', 'Authorization'], // Explicitly list headers accepted from client
   exposedHeaders: ['X-Custom-Header', 'Content-Disposition'], // Headers client can access
