@@ -60,4 +60,9 @@ export const getUsers = async (req, res) => {
       details: error.message,
     });
   }
+
 };
+
+export const testendpoint = async (req, res) => {
+  return res.json({message: "its working fine"})
+}
