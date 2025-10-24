@@ -9,7 +9,13 @@ dotenv.config({ quiet: true });
 const { sequelize } = db;
 const app = express();
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: ['https://red2roast.shop', 'https://www.red2roast.shop', 'http://localhost:5173'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use("/api", routes);
