@@ -34,7 +34,7 @@ export const captureEmail = async (req, res) => {
     return res.status(201).json({
       status: "success",
       title: "You're In!",
-      message: "Thanks for joining the priority list 🎉",
+      message: "Thanks for joining the priority list",
       awakening,
     });
   } catch (error) {
