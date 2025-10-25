@@ -7,6 +7,6 @@ const router = Router();
 
 // Mount route files
 router.use("/user", userRoutes);
-router.use("/rwenzori_awakening", awakeningRoutes);
+router.use("/awakening", awakeningRoutes);
 
 export default router;
