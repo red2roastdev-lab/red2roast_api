@@ -28,12 +28,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Enable CORS for all routes
-app.options('/api', cors())
-// app.use(cors({
-//     origin: ['https://red2roast.shop', 'http://localhost:5173', 'https://www.red2roast.shop'],
-//     methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS', 'PUT'],
-//     allowedHeaders: ['Content-Type', 'Authorization'],
-// }));
+app.use(cors({
+    origin: ['https://red2roast.shop', 'http://localhost:5173', 'https://www.red2roast.shop'],
+    methods: ['GET', 'POST', 'DELETE', 'PATCH', 'OPTIONS', 'PUT'],
+    credentials: true,
+    allowedHeaders: ['Content-Type'],
+}));
 app.use("/api", routes);
 
 //Error handling middleware

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import cors from 'cors';
 import userRoutes from "./userRoutes.js";
 import awakeningRoutes from "./awakeningRoutes.js"
 
