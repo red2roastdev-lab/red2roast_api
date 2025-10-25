@@ -1,39 +1,4 @@
-import db from "../../models/index.js";
-
-const { Awakening } = db;
-
-
-// export const captureEmail = async (req, res) => {
-//   try {
-//     const { email } = req.body;
-//     console.log("Submitted email", email)
-
-  
-//     const userAgent = req.headers['user-agent'];
-
-    
-//     if (!email || !userAgent ) {
-//       return res.status(400).json({ error: "All fields are required" });
-//     }
-
-
-//     const awakening = await Awakening.create({
-//       email,
-//       userAgent,
-//     });
-
-//     res.status(201).json({
-//       message: "Email created successfully",
-//       awakening,
-//     });
-//   } catch (error) {
-//     console.error("Error storing email:", error);
-//     res.status(500).json({
-//       error: "Failed to store email",
-//       details: error.message,
-//     });
-//   }
-// };
+import Awakening from "../../models/awakening.js";
 
 // Create a new post (email capture)
 export const captureEmail = async (req, res) => {

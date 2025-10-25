@@ -1,18 +1,21 @@
-// models/user.js
-export default (sequelize, DataTypes) => {
-  const User = sequelize.define("User", {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
+import { Sequelize } from "sequelize";
+import db from "../config/database.js";
+
+const { DataTypes } = Sequelize;
+
+const User = db.define('users', {
+  firstName: {
+    type: DataTypes.STRING
   },
-    {
-      tableName: 'users'
-    });
+  lastName: {
+    type: DataTypes.STRING
+  },
+  email: {
+    type: DataTypes.STRING
+  }
+},
+{
+  freezeTableName: true,
+})
 
-  // // Associations
-  // User.associate = (models) => {
-  //   User.hasMany(models.Post, { foreignKey: "userId" });
-  // };
-
-  return User;
-};
+export default User

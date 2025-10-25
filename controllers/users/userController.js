@@ -1,6 +1,4 @@
-import db from "../../models/index.js";
-
-const { User, Post } = db;
+import User from "../../models/user.js";
 
 // Create a new user
 export const createUser = async (req, res) => {

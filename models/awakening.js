@@ -1,11 +1,18 @@
-export default (sequelize, DataTypes) => {
-  const Awakening = sequelize.define("Awakening", {
-    email: DataTypes.STRING,
-    userAgent: DataTypes.STRING,
-  },
-    {
-      tableName: "awakening"
-    });
+import { Sequelize } from "sequelize";
+import db from "../config/database.js";
 
-  return Awakening;
-};
+const { DataTypes } = Sequelize;
+
+const Awakening = db.define('awakening', {
+  email: {
+    type: DataTypes.STRING
+  },
+  userAgent: {
+    type: DataTypes.STRING
+  }
+},
+{
+  freezeTableName: true,
+})
+
+export default Awakening
