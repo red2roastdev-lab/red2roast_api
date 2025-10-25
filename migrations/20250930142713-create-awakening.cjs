@@ -12,9 +12,6 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
-      userAgent: {
-        type: Sequelize.STRING
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

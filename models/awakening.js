@@ -7,9 +7,6 @@ const Awakening = db.define('awakening', {
   email: {
     type: DataTypes.STRING
   },
-  userAgent: {
-    type: DataTypes.STRING
-  }
 },
 {
   freezeTableName: true,

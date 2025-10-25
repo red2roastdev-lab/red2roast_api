@@ -6,10 +6,9 @@ export const captureEmail = async (req, res) => {
     const { email } = req.body;
     console.log("Submitted email:", email);
 
-    const userAgent = req.headers["user-agent"];
 
     // Validate input
-    if (!email || !userAgent) {
+    if (!email) {
       return res.status(400).json({
         status: "error",
         title: "Missing Information",
@@ -30,7 +29,6 @@ export const captureEmail = async (req, res) => {
     // Save new email
     const awakening = await Awakening.create({
       email,
-      userAgent,
     });
 
     return res.status(201).json({
@@ -40,7 +38,7 @@ export const captureEmail = async (req, res) => {
       awakening,
     });
   } catch (error) {
-    console.error("Error storing email:", error);
+    console.error("Error storing email:", error.message);
     return res.status(500).json({
       status: "error",
       title: "Something Went Wrong",
