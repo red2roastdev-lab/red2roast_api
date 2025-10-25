@@ -1,0 +1,63 @@
+# ==========================
+# React + Vite .gitignore
+# ==========================
+
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Build output
+dist/
+build/
+*.local
+
+# Local environment variables
+.env
+.env.*
+!.env.example
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+vite-error.log*
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Local testing
+coverage/
+.cache/
+.tmp/
+*.local
+
+# Optional eslint / prettier caches
+.eslintcache
+.prettiercache
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Storybook
+out/
+storybook-static/
+
+# VS Code local history
+.history/
