@@ -6,7 +6,6 @@ import awakeningRoutes from "./awakeningRoutes.js"
 const router = Router();
 
 // Mount route files
-router.use(cors())
 router.use("/user", userRoutes);
 router.use("/rwenzori_awakening", awakeningRoutes);
 
