@@ -35,7 +35,7 @@ app.use(cors({
 }));
 
 // Handle preflight requests for all routes
-app.options('*', cors());
+app.options('/api/*', cors());
 
 app.use("/api", routes);
 
