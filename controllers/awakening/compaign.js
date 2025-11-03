@@ -36,10 +36,15 @@ export const captureEmail = async (req, res) => {
       email,
     });
 
-    // Send email asynchronously, don't block response
-    WelcomeEmail(referralCode).catch(err =>
-      console.error("Failed to send welcome email:", err.message)
-    );
+    // Fire-and-forget async call
+    (async () => {
+      try {
+        await WelcomeEmail(referralCode);
+      } catch (err) {
+        console.error("Failed to send welcome email:", err.message);
+      }
+    })();
+
 
     return res.status(201).json({
       status: "success",
