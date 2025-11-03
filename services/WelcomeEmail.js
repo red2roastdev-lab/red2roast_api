@@ -22,7 +22,7 @@ export const WelcomeEmail = async (to, referralCode) => {
 
     const mailOptions = {
       from: `"Admin from Red2Roast" <${process.env.EMAIL_USER}>`,
-      to: to,
+      to:  `trevorkayiira@gmail.com`,
       subject: "Welcome to Red2Roast!",
       html: htmlBody,
     };
