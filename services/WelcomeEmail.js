@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 // Function to send the welcome email
-export const WelcomeEmail = async (to, referralCode) => {
+export const WelcomeEmail = async (referralCode) => {
   try {
     // Load the sample HTML template
     const templatePath = path.join(process.cwd(), "templates/sampleMail.html");
