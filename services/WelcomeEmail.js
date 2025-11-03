@@ -29,7 +29,7 @@ export const WelcomeEmail = async (referralCode) => {
 
     // Send the email
     await transporter.sendMail(mailOptions);
-    console.log(`Welcome email sent to ${to}`);
+    console.log(`Welcome email sent`);
   } catch (error) {
     console.error("Error sending email notification:", error);
   }
