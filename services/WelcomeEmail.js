@@ -1,4 +1,4 @@
-import transporter from "../middlewares/emailTransporter.js";
+import transporter from "../middleswares/emailTransporter.js";
 import fs from "fs";
 import path from "path";
 
