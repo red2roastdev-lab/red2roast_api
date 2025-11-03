@@ -1,6 +1,6 @@
 import Awakening from "../../models/awakening.js";
 import crypto from "crypto"
-import { sendWelcomeEmail, WelcomeEmail } from "../../services/WelcomeEmail.js";
+import { WelcomeEmail } from "../../services/WelcomeEmail.js";
 import { generateReferralCode } from "../../services/generateReferralCode.js";
 
 // Create a new post (email capture)
