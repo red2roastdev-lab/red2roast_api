@@ -1,34 +1,36 @@
-// Imports
-import postmark from "postmark";
+import transporter from "../middlewares/emailTransporter.js";
 import fs from "fs";
 import path from "path";
 
-// Create Postmark client
-const client = new postmark.ServerClient("62573b34-67df-49a6-abb8-850690ca9751");
+// Function to send the welcome email
+export const WelcomeEmail = async (to, referralCode) => {
+  try {
+    // Load the sample HTML template
+    const templatePath = path.join(process.cwd(), "templates/sampleMail.html");
+    let htmlBody = fs.readFileSync(templatePath, "utf8");
 
-// Function to send welcome email
-export function sendWelcomeEmail(to, referralCode) {
-  // Load your HTML email template
-  const templatePath = path.join(process.cwd(), "templates/sampleMail.html");
-  let htmlBody = fs.readFileSync(templatePath, "utf8");
+    // Inject referral link inside the HTML
+    const referralLink = `https://red2roast.shop/?ref=${referralCode}`;
 
-  // Add referral link
-  const referralLink = `https://red2roast.shop/?ref=${referralCode}`;
-  htmlBody = htmlBody.replace(
-    "</body>",
-    `<div style="text-align:center;margin-top:20px;font-size:14px;">
-       Share your referral link:<br/>
-       <a href="${referralLink}" target="_blank">${referralLink}</a>
-     </div></body>`
-  );
+    htmlBody = htmlBody.replace(
+      "</body>",
+      `<div style="text-align:center;margin-top:20px;font-size:14px;">
+         <p>Share your referral link:</p>
+         <a href="${referralLink}" target="_blank">${referralLink}</a>
+       </div></body>`
+    );
 
-  // Send the email
-  client.sendEmail({
-    From: "developer@red2roast.com",          // change to your verified sender
-    To: "trevorkayiira@gmail.com",
-    Subject: "Hello from Postmark",
-    HtmlBody: htmlBody,
-    TextBody: "Welcome to Red2Roast!",
-    MessageStream: "outbound"
-  });
-}
+    const mailOptions = {
+      from: `"Admin from Red2Roast" <${process.env.EMAIL_USER}>`,
+      to: to,
+      subject: "Welcome to Red2Roast!",
+      html: htmlBody,
+    };
+
+    // Send the email
+    await transporter.sendMail(mailOptions);
+    console.log(`Welcome email sent to ${to}`);
+  } catch (error) {
+    console.error("Error sending email notification:", error);
+  }
+};

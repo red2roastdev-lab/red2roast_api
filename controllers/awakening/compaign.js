@@ -1,6 +1,6 @@
 import Awakening from "../../models/awakening.js";
 import crypto from "crypto"
-import { sendWelcomeEmail } from "../../services/WelcomeEmail.js";
+import { sendWelcomeEmail, WelcomeEmail } from "../../services/WelcomeEmail.js";
 import { generateReferralCode } from "../../services/generateReferralCode.js";
 
 // Create a new post (email capture)
@@ -36,7 +36,7 @@ export const captureEmail = async (req, res) => {
       email,
     });
 
-    sendWelcomeEmail(referralCode);
+    await WelcomeEmail(referralCode)
 
     return res.status(201).json({
       status: "success",
