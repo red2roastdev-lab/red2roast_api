@@ -1,14 +1,21 @@
 import transporter from "../middleswares/emailTransporter.js";
-import fs from "fs";
-import path from "path";
+import { generateActivationToken } from "../utils/tokenUtils.js";
 
 // Function to send the welcome email
-export const WelcomeEmail = async (referralCode) => {
+export const WelcomeEmail = async (lead) => {
     try {
+        const { email, referral_code } = lead;
+
+        //create token to use instead of email
+        const token = generateActivationToken({email})
+
+        //Dynamic links
+        const activationLink = `${process.env.LIVE_HOST}/additional_information?r=${token}`;
+        const referralLink = `${process.env.LIVE_HOST}/?ref=${referral_code}`;
 
         const mailOptions = {
             from: `"Admin from Red2Roast" <${process.env.EMAIL_USER}>`,
-            to: `trevorkayiira@gmail.com`,
+            to: email,
             subject: "Welcome to Red2Roast!",
             html: `
       <head>
@@ -106,7 +113,7 @@ export const WelcomeEmail = async (referralCode) => {
 
                     <!-- YVETTE SECTION -->
                     <h3 class="heading" style="font-size: 20px; line-height: 26px; margin: 0 0 15px 0; color: #B83321;">
-                        🏔️ The Craftsmanship: Quality Guaranteed
+                        <span>🏔️ The Craftsmanship: Quality Guaranteed</span>
                     </h3>
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
                         This initiative is driven by passion, and by **Yvette**, our certified Q-Grader, who ensures the
@@ -138,7 +145,7 @@ export const WelcomeEmail = async (referralCode) => {
 
                     <!-- CTA SECTION (UNLOCK COUPON) -->
                     <h3 class="heading" style="font-size: 20px; line-height: 26px; margin: 0 0 15px 0; color: #4B77BE;">
-                        🎁 Your Personalized 10% OFF Gift Awaits!
+                        <span>🎁 Your Personalized 10% OFF Gift Awaits!</span>
                     </h3>
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
                         We have reserved a special **10% OFF voucher** for your first micro-lot purchase. **To instantly
@@ -154,7 +161,7 @@ export const WelcomeEmail = async (referralCode) => {
                                     <tr>
                                         <td align="center" style="border-radius: 6px; background-color: #B83321;"
                                             bgcolor="#B83321">
-                                            <a href="$$MICRO_PAGE_URL$$" target="_blank"
+                                            <a href="${activationLink}" target="_blank"
                                                 style="font-size: 16px; font-weight: bold; text-decoration: none; color: #ffffff; background-color: #B83321; border: 1px solid #B83321; padding: 12px 25px; display: inline-block; border-radius: 6px;">
                                                 Click here to unlock your 10% Coupon & Personalized Access
                                             </a>
@@ -167,7 +174,9 @@ export const WelcomeEmail = async (referralCode) => {
 
                     <!-- REFERRAL SECTION -->
                     <h3 class="heading" style="font-size: 20px; line-height: 26px; margin: 0 0 15px 0; color: #5B8D5B;">
+                    <span>
                         🤝 Double Your Reward: Free Delivery for Sharing
+                    </span>
                     </h3>
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 15px 0;">
                         We’re building a community around exclusive coffee events, like cupping sessions, in the
@@ -176,7 +185,7 @@ export const WelcomeEmail = async (referralCode) => {
                     </p>
               
                     <p>
-                        <a href="https://red2roast.shop/?ref=${referralCode}" target="_blank">Your Personalized Referral Link</a>
+                        <a href="${referralLink}" target="_blank">${referralLink}</a>
                     </p>
                   
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 15px 0; font-style: italic;">
