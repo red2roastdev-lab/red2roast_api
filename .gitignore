@@ -61,3 +61,6 @@ storybook-static/
 
 # VS Code local history
 .history/
+
+
+config/config.json

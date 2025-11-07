@@ -1,7 +1,14 @@
 import Lead from "../../models/lead.js";
+import axios from "axios";
+import dotenv from "dotenv";
 import Coupon from "../../models/coupon.js";
-import { WelcomeEmail } from "../../services/WelcomeEmail.js";
+import { ReferralEmail } from "../../services/ReferralEmail.js";
+import { postmarkWelcomeEmail } from "../../services/postmarkWelcomeMail.js";
 import { verifyActivationToken } from "../../utils/tokenUtils.js";
+import { nodemailerWelcomeEmail } from "../../services/nodemailerWelcomeEmail.js";
+import { nodemailerActivationEmail } from "../../services/nodemailerActivationEmail.js";
+
+dotenv.config();
 
 // Landing page signup
 export const createLead = async (req, res) => {
@@ -49,12 +56,26 @@ export const createLead = async (req, res) => {
     // Fire-and-forget async call
     (async () => {
       try {
-        await WelcomeEmail(lead);
+        await nodemailerWelcomeEmail(lead);
       } catch (err) {
         console.error("Failed to send welcome email:", err.message);
       }
     })();
 
+    const syncLeadToShopify = async (email) => {
+      try {
+        const res = await axios.post(
+          process.env.SHOPIFY_API_URI,
+          { customer: { email, accepts_marketing: true } },
+          { headers: { "X-Shopify-Access-Token": process.env.SHOPIFY_ACCESS_TOKEN, "Content-Type": "application/json" } }
+        );
+        console.log(`Synced ${email} to Shopify`, res.data);
+      } catch (err) {
+        console.error("Shopify sync failed:", err.response?.data || err.message);
+      }
+    };
+
+    syncLeadToShopify(lead.email);
 
     return res.status(201).json({
       status: "success",
@@ -78,9 +99,6 @@ export const createLead = async (req, res) => {
 // Update name + give 10% coupon
 export const updateLeadName = async (req, res) => {
   try {
-
-
-
     const { token, name } = req.body;
 
     if (!token) {
@@ -102,6 +120,15 @@ export const updateLeadName = async (req, res) => {
       type: "10%_OFF",
     });
 
+
+    // Fetch the coupon we just created
+    const leadCoupon = await Coupon.findOne({
+      where: {
+        lead_id: lead.id,
+        type: "10%_OFF",
+      },
+    });
+
     //Give the referrer a FREE_DELIVERY Coupon if this user was reffered
     if (lead.referral_source_id) {
       await Coupon.create({
@@ -109,6 +136,20 @@ export const updateLeadName = async (req, res) => {
         type: "FREE_DELIVERY",
       })
     }
+
+    // Activation Email: Fire-and-forget async call
+    (async () => {
+      try {
+        await nodemailerActivationEmail({
+          lead_name: lead.name,
+          lead_email: lead.email,
+          referral_code: lead.referral_code,
+          couponCode: leadCoupon.code,
+        });
+      } catch (err) {
+        console.error("Failed to send welcome email:", err.message);
+      }
+    })();
 
     res.json({ message: "Name updated and 10% coupon activated", lead });
   } catch (err) {
@@ -124,3 +165,29 @@ export const getLeadByEmail = async (req, res) => {
   if (!lead) return res.status(404).json({ error: "Lead not found" });
   res.json(lead);
 };
+
+
+export const handleReferredFriend = async (req, res) => {
+  try {
+    const { friendEmail, referrerEmail, referralCode, referrerName } = req.body;
+
+    // Find the lead who is referring
+    const lead = await Lead.findOne({ where: { email: referrerEmail } });
+
+    console.log("friend email", friendEmail)
+
+    if (!lead) {
+      return res.status(404).json({ message: "Referrer not found" });
+    }
+
+    // Fire and forget
+    ReferralEmail(referrerName, referralCode, friendEmail);
+
+    return res.json({ message: "Referral invite sent successfully" });
+
+  } catch (err) {
+    console.error("Error sending referral:", err.message);
+    return res.status(500).json({ message: "Could not send referral" });
+  }
+};
+

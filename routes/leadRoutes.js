@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createLead, getLeadByEmail, updateLeadName } from "../controllers/leads/lead.js";
+import { createLead, getLeadByEmail, handleReferredFriend, updateLeadName } from "../controllers/leads/lead.js";
 
 const router = Router();
 
@@ -7,9 +7,12 @@ const router = Router();
 router.post("/signup", createLead);
 
 // 2. Patch lead to add name (activate 10% coupon)
-router.patch("/update_name", updateLeadName);
+router.post("/update_name", updateLeadName);
 
 // 3. Get lead by email (for frontend)
 router.get("/:email", getLeadByEmail)
+
+//4/ 
+router.post("/refer_friend", handleReferredFriend)
 
 export default router;
