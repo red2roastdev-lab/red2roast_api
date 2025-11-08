@@ -62,20 +62,20 @@ export const createLead = async (req, res) => {
       }
     })();
 
-    const syncLeadToShopify = async (email) => {
-      try {
-        const res = await axios.post(
-          process.env.SHOPIFY_API_URI,
-          { customer: { email, accepts_marketing: true } },
-          { headers: { "X-Shopify-Access-Token": process.env.SHOPIFY_ACCESS_TOKEN, "Content-Type": "application/json" } }
-        );
-        console.log(`Synced ${email} to Shopify`, res.data);
-      } catch (err) {
-        console.error("Shopify sync failed:", err.response?.data || err.message);
-      }
-    };
+    // const syncLeadToShopify = async (email) => {
+    //   try {
+    //     const res = await axios.post(
+    //       process.env.SHOPIFY_API_URI,
+    //       { customer: { email, accepts_marketing: true } },
+    //       { headers: { "X-Shopify-Access-Token": process.env.SHOPIFY_ACCESS_TOKEN, "Content-Type": "application/json" } }
+    //     );
+    //     console.log(`Synced ${email} to Shopify`, res.data);
+    //   } catch (err) {
+    //     console.error("Shopify sync failed:", err.response?.data || err.message);
+    //   }
+    // };
 
-    syncLeadToShopify(lead.email);
+    // syncLeadToShopify(lead.email);
 
     return res.status(201).json({
       status: "success",
@@ -95,6 +95,41 @@ export const createLead = async (req, res) => {
     });
   }
 };
+
+//shopify function
+
+const syncLeadToShopify = async (lead) => {
+  try {
+    // Split full name into first and last name (if possible)
+    const nameParts = lead.name.trim().split(/\s+/); // split by any amount of whitespace
+    const firstName = nameParts[0] || "";
+    const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : ""; // handle middle/last names
+
+    const res = await axios.post(
+      process.env.SHOPIFY_API_URI,
+      {
+        customer: {
+          email: lead.email,
+          first_name: firstName,
+          last_name: lastName,
+          accepts_marketing: true,
+          note: "Lead for Red2Roast",
+        },
+      },
+      {
+        headers: {
+          "X-Shopify-Access-Token": process.env.SHOPIFY_ACCESS_TOKEN,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log(`✅ Synced ${lead.email} to Shopify`, res.data);
+  } catch (err) {
+    console.error("Shopify sync failed:", err.response?.data || err.message);
+  }
+};
+
 
 // Update name + give 10% coupon
 export const updateLeadName = async (req, res) => {
@@ -150,6 +185,8 @@ export const updateLeadName = async (req, res) => {
         console.error("Failed to send welcome email:", err.message);
       }
     })();
+
+    syncLeadToShopify(lead);
 
     res.json({ message: "Name updated and 10% coupon activated", lead });
   } catch (err) {

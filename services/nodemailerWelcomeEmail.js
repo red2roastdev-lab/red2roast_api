@@ -10,8 +10,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
         const token = generateActivationToken({email})
 
         //Dynamic links
-        const activationLink = `${process.env.LOCAL_HOST}/additional_information?r=${token}`;
-        const referralLink = `${process.env.LOCAL_HOST}/?ref=${referral_code}`;
+        const activationLink = `${process.env.LIVE_HOST}/additional_information?r=${token}`;
 
         const mailOptions = {
             from: `"Red2Roast Team" <${process.env.EMAIL_USER}>`,

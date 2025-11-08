@@ -10,11 +10,11 @@ export const brevoWelcomeEmail = async (lead) => {
         const token = generateActivationToken({ email })
 
         // Dynamic links
-        const activationLink = `${process.env.LOCAL_HOST}/additional_information?r=${token}`;
-        const referralLink = `${process.env.LOCAL_HOST}/?ref=${referral_code}`;
+        const activationLink = `${process.env.LIVE_HOST}/additional_information?r=${token}`;
 
         // The HTML body (Content omitted for brevity but remains the same)
         const htmlBody = `
+             
              <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -151,7 +151,7 @@ export const brevoWelcomeEmail = async (lead) => {
                             <td align="center">
                                 <a href="https://cinema8.com/video/kXoEg35O" target="_blank"
   style="display:block; position:relative; text-decoration:none; line-height:0;">
-  <img src="https://red2roast.shop/images/Cover_Yvette_video.png"
+  <img src="https://red2roast.shop/images/Yvette_video.png"
        alt="Watch Yvette's story"
        width="100%" style="display:block; border:0; max-width:100%;">
 </a>

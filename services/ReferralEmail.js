@@ -8,7 +8,7 @@ export const ReferralEmail = async (referrerName, referralCode, friendEmail) => 
         //create token to use instead of email
 
         //Dynamic links
-        const referralLink = `${process.env.LOCAL_HOST}/?ref=${referralCode}`;
+        const referralLink = `${process.env.LIVE_HOST}/?ref=${referralCode}`;
 
         const mailOptions = {
             from: `"Red2Roast Team" <${process.env.EMAIL_USER}>`,

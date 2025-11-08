@@ -4,9 +4,6 @@ import transporter from "../middleswares/emailTransporter.js";
 export const nodemailerActivationEmail = async ({ lead_name, lead_email, referral_code, couponCode }) => {
     try {
 
-        //Dynamic links
-        const referralLink = `${process.env.LOCAL_HOST}/refer_friend/?ref=${referral_code}`;
-
         const mailOptions = {
             from: `"Red2Roast Team" <${process.env.EMAIL_USER}>`,
             to: lead_email,
