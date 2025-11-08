@@ -7,6 +7,7 @@ import { postmarkWelcomeEmail } from "../../services/postmarkWelcomeMail.js";
 import { verifyActivationToken } from "../../utils/tokenUtils.js";
 import { nodemailerWelcomeEmail } from "../../services/nodemailerWelcomeEmail.js";
 import { nodemailerActivationEmail } from "../../services/nodemailerActivationEmail.js";
+import { brevoWelcomeEmail } from "../../services/brevoWelcomeMail.js";
 
 dotenv.config();
 

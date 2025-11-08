@@ -8,7 +8,7 @@ dotenv.config();
 const brevoApiInstance = new Brevo.TransactionalEmailsApi();
 
 // ✅ IMPORTANT: Brevo uses `apiKey` now, not `api-key`
-brevoApiInstance.authentications['apiKey'].apiKey = process.env.BREVO_API_KEY;
+brevoApiInstance.authentications['apiKey'].apiKey = process.env.BREVO_EMAIL_PASS;
 
 // Export the email constructor class
 const SendSmtpEmail = Brevo.SendSmtpEmail;

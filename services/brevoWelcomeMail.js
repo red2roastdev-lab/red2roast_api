@@ -10,7 +10,7 @@ export const brevoWelcomeEmail = async (lead) => {
         const token = generateActivationToken({ email })
 
         // Dynamic links
-        const activationLink = `${process.env.LIVE_HOST}/additional_information?r=${token}`;
+        const activationLink = `${process.env.LOCAL_HOST}/additional_information?r=${token}`;
 
         // The HTML body (Content omitted for brevity but remains the same)
         const htmlBody = `
@@ -202,7 +202,7 @@ export const brevoWelcomeEmail = async (lead) => {
         const messagePayload = new SendSmtpEmail({ 
             // Must be a verified sender email in your Brevo account
             sender: {
-                email: process.env.EMAIL_SENDER_ADDRESS,
+                email: process.env.BREVO_EMAIL_SENDER_ADDRESS,
                 name: "Red2Roast Team"
             },
 

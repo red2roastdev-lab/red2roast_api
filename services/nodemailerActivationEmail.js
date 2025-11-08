@@ -16,11 +16,6 @@ export const nodemailerActivationEmail = async ({ lead_name, lead_email, referra
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap"
-        rel="stylesheet">
 </head>
 
 <body style="margin: 20px; padding: 0; min-width: 100%; background-color: #F4F4F4;">
@@ -28,12 +23,12 @@ export const nodemailerActivationEmail = async ({ lead_name, lead_email, referra
     <center class="wrapper"
         style="width: 100%; table-layout: fixed; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
         <table class="main-content" width="100%" cellpadding="0" cellspacing="0" border="0"
-            style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-spacing: 0; border-collapse: collapse; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-spacing: 0; border-collapse: collapse; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-family: 'Open Sans', Helvetica, Arial, sans-serif;">
 
             <!-- HEADER / LOGO -->
             <tr>
                 <td align="center" style="padding: 20px 0 10px 0;">
-                    <img src="https://red2roast.shop/images/R2RLogos_landscape.png" alt="Red2Roast" width="246"
+                    <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629202/R2RLogos_landscape_dpjfqm.png" alt="Red2Roast" width="246"
                         height="80" style="display: block; border: 0; max-width: 100%; height: auto;" />
                 </td>
             </tr>
@@ -91,7 +86,7 @@ export const nodemailerActivationEmail = async ({ lead_name, lead_email, referra
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 25px 0 25px 0;">
                         <tr>
                             <td align="center">
-                              <img src="https://red2roast.shop/images/20251002_Red2Roast_00073.jpg"
+                              <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629482/20251002_Red2Roast_DXanthopoulos_00073_1_gbpi93.jpg"
        alt="Red Cherries"
        width="100%" style="display:block; border:0; max-width:100%;">
 

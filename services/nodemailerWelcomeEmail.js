@@ -36,7 +36,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
             padding: 0;
             min-width: 100%;
             background-color: #F4F4F4;
-            font-family: "Fraunces", serif;
+            font-family: 'Open Sans', Helvetica, Arial, sans-serif;
         }
 
         table {
@@ -94,12 +94,12 @@ export const nodemailerWelcomeEmail = async (lead) => {
     <center class="wrapper"
         style="width: 100%; table-layout: fixed; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
         <table class="main-content" width="100%" cellpadding="0" cellspacing="0" border="0"
-            style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-spacing: 0; border-collapse: collapse; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-spacing: 0; border-collapse: collapse; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); font-family: 'Open Sans', Helvetica, Arial, sans-serif;">
 
             <!-- HEADER / LOGO -->
             <tr>
                 <td align="center" style="padding: 20px 0 10px 0;">
-                    <img src="https://red2roast.shop/images/R2RLogos_landscape.png" alt="Red2Roast" width="246"
+                    <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629202/R2RLogos_landscape_dpjfqm.png" alt="Red2Roast" width="246"
                         height="80" style="display: block; border: 0; max-width: 100%; height: auto;" />
                 </td>
             </tr>
@@ -153,11 +153,11 @@ export const nodemailerWelcomeEmail = async (lead) => {
                         <tr>
                             <td align="center">
                                 <a href="https://cinema8.com/video/kXoEg35O" target="_blank"
-  style="display:block; position:relative; text-decoration:none; line-height:0;">
-  <img src="https://red2roast.shop/images/Yvette_video.png"
-       alt="Watch Yvette's story"
-       width="100%" style="display:block; border:0; max-width:100%;">
-</a>
+                                style="display:block; position:relative; text-decoration:none; line-height:0;">
+                                <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629068/Yvette_video_wkdjlx.png"
+                                    alt="Watch Yvette's story"
+                                    width="100%" style="display:block; border:0; max-width:100%;">
+                                </a>
 
                             </td>
                         </tr>

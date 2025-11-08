@@ -30,12 +30,12 @@ export const ReferralEmail = async (referrerName, referralCode, friendEmail) => 
 <center style="width: 100%;">
 
 <table cellpadding="0" cellspacing="0" border="0" 
-style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,.10);">
+style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; border-radius:8px; box-shadow:0 4px 6px rgba(0,0,0,.10); font-family: 'Open Sans', Helvetica, Arial, sans-serif;">
 
   <!-- LOGO -->
   <tr>
     <td align="center" style="padding: 25px 0;">
-      <img src="https://red2roast.shop/images/R2RLogos_landscape.png"
+      <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629202/R2RLogos_landscape_dpjfqm.png"
       alt="Red2Roast" width="246" style="display:block; border:0;" />
     </td>
   </tr>
