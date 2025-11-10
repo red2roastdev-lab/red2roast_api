@@ -1,19 +1,19 @@
-import transporter from "../middleswares/emailTransporter.js";
+import transporter from "../middleswares/emailTransporterMC.js";
 import { generateActivationToken } from "../utils/tokenUtils.js";
 
 // Function to send the welcome email
 export const nodemailerWelcomeEmail = async (lead) => {
     try {
-        const { email, referral_code } = lead;
+        const { email } = lead;
 
         //create token to use instead of email
         const token = generateActivationToken({email})
 
         //Dynamic links
-        const activationLink = `${process.env.LIVE_HOST}/additional_information?r=${token}`;
+        const activationLink = `${process.env.LOCAL_HOST}/additional_information?r=${token}`;
 
         const mailOptions = {
-            from: `"Red2Roast Team" <${process.env.EMAIL_USER}>`,
+            from: `"Red2Roast Team" <${process.env.MC_EMAIL_SENDER}>`,
             to: email,
             subject: "Welcome to Red2Roast!",
             html: `
@@ -152,7 +152,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 25px 0 25px 0;">
                         <tr>
                             <td align="center">
-                                <a href="https://cinema8.com/video/kXoEg35O" target="_blank"
+                                <a href="https://vimeo.com/red2roast/yvette" target="_blank"
                                 style="display:block; position:relative; text-decoration:none; line-height:0;">
                                 <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629068/Yvette_video_wkdjlx.png"
                                     alt="Watch Yvette's story"
@@ -188,7 +188,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
                     Best,<br />
                     The Red2Roast Team
                     <br /><br />
-                    <a href="#" style="color: #AAAAAA; text-decoration: underline;">Unsubscribe</a> | Red2Roast |
+                    Red2Roast |
                     Utrecht, Netherlands
                 </td>
             </tr>

@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { getUsers, createUser } from "../controllers/users/userController.js";
+import { completeRegistration, handleLogin, requestAccess } from "../controllers/partners_portal/users.js";
+import { getPartnerByEmail } from "../controllers/partners_portal/partner.js";
 
 const router = Router();
 
-router.post("/", createUser); //POSt User
-router.get("/:id", getUsers); //GET Users
+router.post("/request-access", requestAccess);
+router.post("/complete-registration", completeRegistration);
+router.post("/login-request", handleLogin);
+router.post("/get-partner", getPartnerByEmail);
+
 
 export default router;

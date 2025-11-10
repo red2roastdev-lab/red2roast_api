@@ -1,11 +1,11 @@
-import transporter from "../middleswares/emailTransporter.js";
+import transporter from "../middleswares/emailTransporterMC.js";
 
 // Function to send the welcome email
 export const nodemailerActivationEmail = async ({ lead_name, lead_email, referral_code, couponCode }) => {
     try {
 
         const mailOptions = {
-            from: `"Red2Roast Team" <${process.env.EMAIL_USER}>`,
+            from: `"Red2Roast Team" <${process.env.MC_EMAIL_USER}>`,
             to: lead_email,
             subject: "Welcome to Red2Roast!",
             html: `
@@ -69,15 +69,15 @@ export const nodemailerActivationEmail = async ({ lead_name, lead_email, referra
                         Invite your friends to join the Red2Roast family and you enjoy free delivery on your next order.
                     </p>
                     
-                    <p>
+                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
                         We're also hosting a series of exclusive coffee events across the Netherlands, intimate cupping sessions where you can taste, learn and connect over our specilaity Rwenzori beans. Know someone who'd love that experience? Bring them along!
                     </p>
                     
-                    <p>
+                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
                         When afriend signs up we'll send you a FREE DELIVERY voucher and if three or more friends join through, you'll unlock a special gift from our store, your choise, your treat.
                     </p>
                     
-                    <p>
+                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
                         Red2Roast is more than coffee. its a community built on passion, purpose and connection. Welcome aboard. Lets grow together, one cup at a time
                     </p>
                     
@@ -102,7 +102,7 @@ export const nodemailerActivationEmail = async ({ lead_name, lead_email, referra
                     Best,<br />
                     The Red2Roast Team
                     <br /><br />
-                    <a href="#" style="color: #AAAAAA; text-decoration: underline;">Unsubscribe</a> | Red2Roast |
+                    Red2Roast |
                     Utrecht, Netherlands
                 </td>
             </tr>

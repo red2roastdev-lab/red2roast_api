@@ -1,4 +1,4 @@
-import transporter from "../middleswares/emailTransporter.js";
+import transporter from "../middleswares/emailTransporterMC.js";
 import { generateActivationToken } from "../utils/tokenUtils.js";
 
 // Function to send the welcome email
@@ -8,10 +8,10 @@ export const ReferralEmail = async (referrerName, referralCode, friendEmail) => 
         //create token to use instead of email
 
         //Dynamic links
-        const referralLink = `${process.env.LIVE_HOST}/?ref=${referralCode}`;
+        const referralLink = `${process.env.LOCAL_HOST}/?ref=${referralCode}`;
 
         const mailOptions = {
-            from: `"Red2Roast Team" <${process.env.EMAIL_USER}>`,
+            from: `"Red2Roast Team" <${process.env.MC_EMAIL_USER}>`,
             to: friendEmail,
             subject: "Welcome to Red2Roast!",
             html: `
@@ -88,7 +88,7 @@ style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; bo
                     Best,<br />
                     The Red2Roast Team
                     <br /><br />
-                    <a href="#" style="color: #AAAAAA; text-decoration: underline;">Unsubscribe</a> | Red2Roast |
+                    Red2Roast |
                     Utrecht, Netherlands
                 </td>
             </tr>
