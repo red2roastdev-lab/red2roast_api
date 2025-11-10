@@ -138,6 +138,8 @@ export const handleLogin = async (req, res) => {
         if (user.role === 'partner') {
             // Assuming there is a Partner model that contains business details
             businessDetails = await Partner.findOne({ where: { email: user.email } }); // Adjust based on your schema
+        } else if (user.role === 'admin'){
+            businessDetails = null
         }
 
         const authToken = generateActivationToken({

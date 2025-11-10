@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: ['https://red2roast.shop', 'http://localhost:5173', 'https://red2roast.net'],
+    origin: ['https://red2roast.shop', 'http://localhost:5173', 'https://red2roast.net', 'https://red2roast.partners', 'http://localhost:5174'],
     methods: ['POST', 'GET', 'DELETE', 'OPTIONS', 'PATCH'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Accept'],
