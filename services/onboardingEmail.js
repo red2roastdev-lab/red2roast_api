@@ -9,7 +9,7 @@ export const onboardingEmail = async (email, tempPass) => {
         const token = generateActivationToken({ email });
 
         // Dynamic activation link
-        const activationLink = `${process.env.LIVE_HOST}/complete_registration/?r=${token}`;
+        const activationLink = `${process.env.LIVE_HOST_PARTNERS}/complete_registration/?r=${token}`;
 
         const mailOptions = {
             from: `"Red2Roast Team" <${process.env.MC_EMAIL_USER}>`,
