@@ -71,7 +71,8 @@ export const ShopifyWelcomeDC = async (uniqueCode) => {
     );
     console.log("ending execution.......................................")
     console.log("Response", response.data)
-    console.log("User Errors:", JSON.stringify(data.userErrors, null, 2))
+    console.log("User Errors:", response.data?.data?.discountCodeBasicCreate)
+    console.log("User Errors:", response.data?.data?.discountCodeBasicCreate.userErrors)
     return uniqueCode;
 
   } catch (err) {
