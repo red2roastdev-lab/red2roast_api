@@ -34,7 +34,7 @@ export const ShopifyWelcomeDC = async (uniqueCode) => {
 
   const variables = {
     basicCodeDiscount: {
-      title: "Welcome Discount 10%",
+      title: "WELCOME10_OFF",
       code: uniqueCode,
       combinesWith: {
         productDiscounts: true,
