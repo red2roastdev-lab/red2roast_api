@@ -1,13 +1,16 @@
 import Lead from "../../models/lead.js";
 import axios from "axios";
 import dotenv from "dotenv";
+import { customAlphabet } from 'nanoid';
 import Coupon from "../../models/coupon.js";
 import { ReferralEmail } from "../../services/ReferralEmail.js";
 import { verifyActivationToken } from "../../utils/tokenUtils.js";
 import { nodemailerWelcomeEmail } from "../../services/nodemailerWelcomeEmail.js";
 import { nodemailerActivationEmail } from "../../services/nodemailerActivationEmail.js";
+import { ShopifyWelcomeDC } from "../../shopify/ShopifyWelcome.js";
 
 dotenv.config();
+const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6);
 
 // Landing page signup
 export const createLead = async (req, res) => {
@@ -132,10 +135,14 @@ export const updateLeadName = async (req, res) => {
     lead.status = "activated";
     await lead.save();
 
+    const localCode = `R2R-${nanoid()}`;
+    const shopifyCode = await ShopifyWelcomeDC(localCode);
+
     // Give 10% coupon
     await Coupon.create({
       lead_id: lead.id,
       type: "10%_OFF",
+      code: shopifyCode
     });
 
 
@@ -146,6 +153,7 @@ export const updateLeadName = async (req, res) => {
         type: "10%_OFF",
       },
     });
+
 
     //Give the referrer a FREE_DELIVERY Coupon if this user was reffered
     if (lead.referral_source_id) {
@@ -168,7 +176,6 @@ export const updateLeadName = async (req, res) => {
         console.error("Failed to send welcome email:", err.message);
       }
     })();
-
     syncLeadToShopify(lead);
 
     res.json({ message: "Name updated and 10% coupon activated", lead });

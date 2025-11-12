@@ -1,20 +1,14 @@
 import { Sequelize } from "sequelize";
-import { customAlphabet } from 'nanoid';
 import db from "../config/database.js";
 import Lead from "./lead.js";
 
 const { DataTypes } = Sequelize;
-
-// Create a nanoid generator, e.g., 6 characters from A-Z and 0-9
-const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6);
+// const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6);
 
 const Coupon = db.define('coupons', {
   lead_id: {
     type: DataTypes.INTEGER,
-    references: {
-      model: 'leads',
-      key: 'id'
-    }
+    references: { model: 'leads', key: 'id' }
   },
   type: {
     allowNull: true,
@@ -33,19 +27,29 @@ const Coupon = db.define('coupons', {
   freezeTableName: true
 });
 
-// Hook to generate unique coupon code before creating
-Coupon.beforeCreate(async (coupon) => {
-  let unique = false;
-  let generatedCode;
-  while (!unique) {
-    generatedCode = `R2R-${nanoid()}`; // e.g., R2R-A1B2C3
-    const existing = await Coupon.findOne({ where: { code: generatedCode } });
-    if (!existing) {
-      coupon.code = generatedCode;
-      unique = true;
-    }
-  }
-});
+// Coupon.beforeCreate(async (coupon) => {
+//   let generatedCode;
+
+//   if (coupon.type === '10%_OFF') {
+//     // Create discount in Shopify
+//     const localCode = `R2R-${nanoid()}`;
+//     const shopifyCode = await ShopifyWelcomeDC(localCode);
+
+//     // Use the returned Shopify code or fallback
+//     coupon.code = shopifyCode || localCode;
+//   } else {
+//     // For other coupon types, just generate locally
+//     let unique = false;
+//     while (!unique) {
+//       generatedCode = `R2R-${nanoid()}`;
+//       const existing = await Coupon.findOne({ where: { code: generatedCode } });
+//       if (!existing) {
+//         coupon.code = generatedCode;
+//         unique = true;
+//       }
+//     }
+//   }
+// });
 
 // Associations
 Lead.hasMany(Coupon, { foreignKey: 'lead_id' });

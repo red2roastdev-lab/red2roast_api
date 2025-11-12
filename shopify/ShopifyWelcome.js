@@ -1,0 +1,88 @@
+import axios from "axios";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+
+export const ShopifyWelcomeDC = async (uniqueCode) => {
+  try {
+    const mutation = `
+      mutation discountCodeBasicCreate($basicCodeDiscount: DiscountCodeBasicInput!) {
+        discountCodeBasicCreate(basicCodeDiscount: $basicCodeDiscount) {
+          codeDiscountNode {
+            id
+            codeDiscount {
+              ... on DiscountCodeBasic {
+                title
+                codes(first: 1) {
+                  nodes {
+                    code
+                  }
+                }
+              }
+            }
+          }
+          userErrors {
+            field
+            message
+          }
+        }
+      }
+    `;
+
+    const variables = {
+      basicCodeDiscount: {
+        title: "Welcome Discount 10%",
+        code: uniqueCode,
+        combinesWith: {
+          productDiscounts: true,
+          orderDiscounts: true,
+          shippingDiscounts: true,
+        },
+        startsAt: new Date().toISOString(),
+        appliesOncePerCustomer: true,
+        usageLimit: 1,
+        context: { all: "ALL" },
+        customerGets: {
+          value: { percentage: 0.1 },
+          items: { all: true },
+          appliesOnOneTimePurchase: true,
+          appliesOnSubscription: true
+        },
+      }
+    };
+
+
+    console.log("starting execution.......................................")
+    const response = await axios.post(
+      `${process.env.SHOPIFY_GQL_URI}`,
+      {
+        query: mutation,
+        variables: variables
+      },
+      {
+        headers: {
+          "X-Shopify-Access-Token": process.env.SHOPIFY_ACCESS_TOKEN,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("ending execution.......................................")
+
+    if (response.data.data.discountCodeBasicCreate.userErrors.length > 0) {
+      console.error("Errors:", response.data.data.discountCodeBasicCreate.userErrors);
+      return null;
+    }
+
+    console.log(`Created Shopify Discount Code: ${uniqueCode}`);
+    return uniqueCode;
+
+  } catch (err) {
+    console.error("Shopify Discount Code creation failed:");
+    console.error("Full error:", err);
+    console.error("Response data:", err.response?.data);
+    console.error("Response status:", err.response?.status);
+    console.error("Error message:", err.message);
+    return null;
+  }
+};
