@@ -7,43 +7,52 @@ dotenv.config();
 export const ShopifyWelcomeDC = async (uniqueCode) => {
   try {
     const mutation = `
-      mutation discountCodeBasicCreate($basicCodeDiscount: DiscountCodeBasicInput!) {
-  discountCodeBasicCreate(basicCodeDiscount: $basicCodeDiscount) {
-    codeDiscountNode {
-      nodes {
-          code
+  mutation discountCodeBasicCreate($basicCodeDiscount: DiscountCodeBasicInput!) {
+    discountCodeBasicCreate(basicCodeDiscount: $basicCodeDiscount) {
+      codeDiscountNode {
+        id
+        codeDiscount {
+          ... on DiscountCodeBasic {
+            codes(first: 1) {
+              edges {
+                node {
+                  code
+                }
+              }
+            }
+          }
         }
-    }
-    userErrors {
-      field
-      message
+      }
+      userErrors {
+        field
+        message
+      }
     }
   }
-}`
+`;
 
 
-
-    const variables = {
-      basicCodeDiscount: {
-        title: "Welcome Discount 10%",
-        code: uniqueCode,
-        combinesWith: {
-          productDiscounts: true,
-          orderDiscounts: true,
-          shippingDiscounts: true,
-        },
-        startsAt: new Date().toISOString(),
-        appliesOncePerCustomer: true,
-        usageLimit: 1,
-        context: { all: "ALL" },
-        customerGets: {
-          value: { percentage: 0.1 },
-          items: { all: true },
-          appliesOnOneTimePurchase: true,
-          appliesOnSubscription: true
-        },
-      }
-    };
+  const variables = {
+    basicCodeDiscount: {
+      title: "Welcome Discount 10%",
+      code: uniqueCode,
+      combinesWith: {
+        productDiscounts: true,
+        orderDiscounts: true,
+        shippingDiscounts: true,
+      },
+      startsAt: new Date().toISOString(),
+      appliesOncePerCustomer: true,
+      usageLimit: 1,
+      context: { all: "ALL" },
+      customerGets: {
+        value: { percentage: 0.1 },
+        items: { all: true },
+        appliesOnOneTimePurchase: true,
+        appliesOnSubscription: true
+      },
+    }
+  };
 
 
     console.log("starting execution.......................................")
