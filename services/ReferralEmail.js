@@ -92,7 +92,7 @@ style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; bo
                     </table>
 
       <p style="margin:26px 0 0 0; color:#555; font-style:italic; text-align:center;">
-        “Coffee connects us. One cup, one story, one friendship at a time.” ☕
+        “Coffee connects us. One cup, one story, one friendship at a time.”
       </p>
 
     </td>

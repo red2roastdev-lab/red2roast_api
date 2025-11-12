@@ -8,6 +8,7 @@ import { verifyActivationToken } from "../../utils/tokenUtils.js";
 import { nodemailerWelcomeEmail } from "../../services/nodemailerWelcomeEmail.js";
 import { nodemailerActivationEmail } from "../../services/nodemailerActivationEmail.js";
 import { ShopifyWelcomeDC } from "../../shopify/ShopifyWelcome.js";
+import { ShopifyFreeDeliveryNL } from "../../shopify/ShopifyFreeDelivery.js";
 
 dotenv.config();
 const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6);
@@ -141,7 +142,7 @@ export const updateLeadName = async (req, res) => {
     // Give 10% coupon
     await Coupon.create({
       lead_id: lead.id,
-      type: "10%_OFF",
+      type: " WELCOME10_OFF",
       code: uniqueCode
     });
 
@@ -150,16 +151,20 @@ export const updateLeadName = async (req, res) => {
     const leadCoupon = await Coupon.findOne({
       where: {
         lead_id: lead.id,
-        type: "10%_OFF",
+        type: "WELCOME10_OFF",
       },
     });
 
 
     //Give the referrer a FREE_DELIVERY Coupon if this user was reffered
     if (lead.referral_source_id) {
+      const uniqueCode2 = `R2R-${nanoid()}`
+      await ShopifyFreeDeliveryNL(uniqueCode2)
+
       await Coupon.create({
         lead_id: lead.referral_source_id,
         type: "FREE_DELIVERY",
+        code: uniqueCode2
       })
     }
 

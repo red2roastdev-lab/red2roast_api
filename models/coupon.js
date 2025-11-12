@@ -12,7 +12,7 @@ const Coupon = db.define('coupons', {
   },
   type: {
     allowNull: true,
-    type: DataTypes.ENUM('10%_OFF', 'FREE_DELIVERY'),
+    type: DataTypes.ENUM('WELCOME10_OFF', 'FREE_DELIVERY'),
   },
   code: {
     type: DataTypes.STRING,
