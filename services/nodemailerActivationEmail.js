@@ -43,50 +43,31 @@ export const nodemailerActivationEmail = async ({ lead_name, lead_email, referra
 
                     <!-- INTRO -->
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 25px 0;">
-                        We're thrilled to have you with us, your journey into the heart of the Rwenzori Mountains starts here.
+                        We're thrilled to have you with us, your journey into the heart of the Rwenzori Mountains starts here. Stay tuned as our webshop prepares to open its doors, and keep your code safe to enjoy your exclusive discount. Our journey has just begun, and we’re delighted to have you with us.
                     </p>
 
                     <!-- COUPON BOX -->
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 25px 0;">
                         <tr>
                             <td align="center" style="background-color:#aaa197; border-radius:8px; padding:18px;">
-                                <p style="font-size:18px; margin:0 0 8px 0; font-weight:bold; color:#000;">
+                                <p style="font-size:18px; margin:0 0 8px 0; font-weight:bold; color:#fff;">
                                     Your 10% Off Coupon 
                                 </p>
                                 <p style="font-size:20px; margin:0; font-weight:bold; color:#fff; letter-spacing:2px;">
                                     ${couponCode}
                                 </p>
-                                <p style="font-size:14px; margin-top:8px; color:#555;">Copy and use it at checkout.</p>
+                                <p style="font-size:14px; margin-top:8px; color:#fff;">Copy and use it at checkout.</p>
                             </td>
                         </tr>
                     </table>
 
-                    <!-- 	PERSONALISED SECTION -->
-                    <h3 class="heading" style="font-size: 20px; line-height: 26px; margin: 0 0 2px 0; color: #000;">
-                        Love great coffee? Share it
-                    </h3>
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        Invite your friends to join the Red2Roast family and you enjoy free delivery on your next order.
-                    </p>
-                    
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        We're also hosting a series of exclusive coffee events across the Netherlands, intimate cupping sessions where you can taste, learn and connect over our specilaity Rwenzori beans. Know someone who'd love that experience? Bring them along!
-                    </p>
-                    
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        When afriend signs up we'll send you a FREE DELIVERY voucher and if three or more friends join through, you'll unlock a special gift from our store, your choise, your treat.
-                    </p>
-                    
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        Red2Roast is more than coffee. its a community built on passion, purpose and connection. Welcome aboard. Lets grow together, one cup at a time
-                    </p>
-                    
+                   
                     
                     <!--  RED CHERRIES -->
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 25px 0 25px 0;">
                         <tr>
                             <td align="center">
-                              <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629482/20251002_Red2Roast_DXanthopoulos_00073_1_gbpi93.jpg"
+                              <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762956060/20251002_Red2Roast_DXanthopoulos_00050_ekjed8.jpg"
        alt="Red Cherries"
        width="100%" style="display:block; border:0; max-width:100%;">
 

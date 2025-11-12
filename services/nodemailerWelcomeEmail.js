@@ -7,7 +7,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
         const { email } = lead;
 
         //create token to use instead of email
-        const token = generateActivationToken({email})
+        const token = generateActivationToken({ email })
 
         //Dynamic links
         const activationLink = `${process.env.LIVE_HOST}/additional_information?r=${token}`;
@@ -17,8 +17,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
             to: email,
             subject: "Welcome to Red2Roast!",
             html: `
-     
-             <!DOCTYPE html
+               <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -124,9 +123,8 @@ export const nodemailerWelcomeEmail = async (lead) => {
                         Your Personalised Gift Awaits!
                     </h3>
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        As we value you buying directly from the source, we have reserved a special <em><b>10% OFF
-                                voucher</b></em> for your first purchase. Activate your personalised discount and keep
-                        in touch with us directly.
+                        We value your choice to buy directly from the source. To thank you, we've reserved a special <em><b>10% OFF
+                                voucher</b></em> for your first purchase. Activate your personalised discount and stay connected with us.
                     </p>
 
                     <!-- BUTTON CTA TO MICRO-PAGE -->
@@ -139,7 +137,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
                                             bgcolor="#aaa197">
                                             <a href="${activationLink}" target="_blank"
                                                 style="font-size: 16px; font-weight: bold; text-decoration: none; color: #ffffff; background-color: #aaa197; border: 1px solid #aaa197; padding: 12px 25px; display: inline-block; border-radius: 6px;">
-                                                Activate Membership
+                                                Activate Discount
                                             </a>
                                         </td>
                                     </tr>
@@ -148,13 +146,13 @@ export const nodemailerWelcomeEmail = async (lead) => {
                         </tr>
                     </table>
 
-                    <!-- YVETTE IMAGE (CLICKABLE) -->
+                    <!--  IMAGE (unCLICKABLE) -->
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 25px 0 25px 0;">
                         <tr>
                             <td align="center">
                                 <a href="https://vimeo.com/red2roast/yvette" target="_blank"
                                 style="display:block; position:relative; text-decoration:none; line-height:0;">
-                                <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629068/Yvette_video_wkdjlx.png"
+                                <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762956060/20251002_Red2Roast_DXanthopoulos_00050_ekjed8.jpg"
                                     alt="Watch Yvette's story"
                                     width="100%" style="display:block; border:0; max-width:100%;">
                                 </a>
@@ -162,22 +160,6 @@ export const nodemailerWelcomeEmail = async (lead) => {
                             </td>
                         </tr>
                     </table>
-
-                    <!-- HIGH QUALITY COFFEE -->
-                    <h3 class="heading"
-                        style="font-size: 20px; line-height: 26px; margin: 0 0 2px 0; color: #333; text-align: left;">
-                        High quality coffee from the heart
-                    </h3>
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 10px 0;">
-                        This initiative is driven by passion, as explains Yvette, our certified Q-Grader, who ensures
-                        the meticulous quality of every small lot. Watch her video for her persoanl story and her love
-                        for the Rwenzori mountain coffee.
-                    </p>
-
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 1px 0;">
-                        Join our mailinglist to have access to her expert blog where she shares coffee insights and
-                        stories of the Rwenzori mountain communities and the rigorous process their coffee undergoes.
-                    </p>
                 </td>
             </tr>
 
@@ -198,6 +180,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
 </body>
 
 </html>
+   
       `,
         };
 

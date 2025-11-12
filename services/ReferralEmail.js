@@ -15,7 +15,7 @@ export const ReferralEmail = async (referrerName, referralCode, friendEmail) => 
             to: friendEmail,
             subject: "Welcome to Red2Roast!",
             html: `
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml">
 
@@ -74,6 +74,22 @@ style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; bo
           </td>
         </tr>
       </table>
+      
+       <!-- IMAGE (CLICKABLE) -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 25px 0 25px 0;">
+                        <tr>
+                            <td align="center">
+                             <td align="center">
+                                <a href="https://vimeo.com/red2roast/yvette" target="_blank"
+                                style="display:block; position:relative; text-decoration:none; line-height:0;">
+                                <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762629482/20251002_Red2Roast_DXanthopoulos_00073_1_gbpi93.jpg"
+                                    alt="Red Cherries"
+                                    width="100%" style="display:block; border:0; max-width:100%;">
+                                </a>
+
+                            </td>
+                        </tr>
+                    </table>
 
       <p style="margin:26px 0 0 0; color:#555; font-style:italic; text-align:center;">
         “Coffee connects us. One cup, one story, one friendship at a time.” ☕
@@ -98,6 +114,7 @@ style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; bo
 </body>
 
 </html>
+
 
       `,
         };
