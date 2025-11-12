@@ -6,29 +6,16 @@ dotenv.config();
 
 export const ShopifyWelcomeDC = async (uniqueCode) => {
   try {
-    const mutation = `
-      mutation discountCodeBasicCreate($basicCodeDiscount: DiscountCodeBasicInput!) {
-        discountCodeBasicCreate(basicCodeDiscount: $basicCodeDiscount) {
-          codeDiscountNode {
-            id
-            codeDiscount {
-              ... on DiscountCodeBasic {
-                title
-                codes(first: 1) {
-                  nodes {
-                    code
-                  }
-                }
-              }
-            }
-          }
-          userErrors {
-            field
-            message
-          }
+      const mutation = `
+    mutation discountCodeBasicCreate($basicCodeDiscount: DiscountCodeBasicInput!) {
+      discountCodeBasicCreate(basicCodeDiscount: $basicCodeDiscount) {
+        userErrors {
+          field
+          message
         }
       }
-    `;
+    }
+  `;
 
     const variables = {
       basicCodeDiscount: {

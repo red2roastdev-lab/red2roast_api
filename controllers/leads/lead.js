@@ -135,14 +135,14 @@ export const updateLeadName = async (req, res) => {
     lead.status = "activated";
     await lead.save();
 
-    const localCode = `R2R-${nanoid()}`;
-    const shopifyCode = await ShopifyWelcomeDC(localCode);
+    const uniqueCode = `R2R-${nanoid()}`;
+    await ShopifyWelcomeDC(uniqueCode);
 
     // Give 10% coupon
     await Coupon.create({
       lead_id: lead.id,
       type: "10%_OFF",
-      code: shopifyCode
+      code: uniqueCode
     });
 
 
