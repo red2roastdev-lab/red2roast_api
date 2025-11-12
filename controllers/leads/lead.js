@@ -142,7 +142,7 @@ export const updateLeadName = async (req, res) => {
     // Give 10% coupon
     await Coupon.create({
       lead_id: lead.id,
-      type: " WELCOME10_OFF",
+      type: "WELCOME10_OFF",
       code: uniqueCode
     });
 
