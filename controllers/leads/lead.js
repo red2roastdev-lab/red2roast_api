@@ -181,6 +181,7 @@ export const updateLeadName = async (req, res) => {
         console.error("Failed to send welcome email:", err.message);
       }
     })();
+    
     syncLeadToShopify(lead);
 
     res.json({ message: "Name updated and 10% coupon activated", lead });
