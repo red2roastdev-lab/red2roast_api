@@ -44,7 +44,7 @@ export const ShopifyWelcomeDC = async (uniqueCode) => {
       startsAt: new Date().toISOString(),
       appliesOncePerCustomer: true,
       usageLimit: 1,
-      context: { all: "ALL" },
+      customerSelection: { all: true },
       customerGets: {
         value: { percentage: 0.1 },
         items: { all: true },
