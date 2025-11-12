@@ -13,7 +13,7 @@ export const ShopifyWelcomeDC = async (uniqueCode) => {
         id
         codeDiscount {
           ... on DiscountCodeBasic {
-            codes(first: 1) {
+            codes(first: 5) {
               edges {
                 node {
                   code
@@ -48,8 +48,6 @@ export const ShopifyWelcomeDC = async (uniqueCode) => {
       customerGets: {
         value: { percentage: 0.1 },
         items: { all: true },
-        appliesOnOneTimePurchase: true,
-        appliesOnSubscription: true
       },
     }
   };
@@ -70,9 +68,7 @@ export const ShopifyWelcomeDC = async (uniqueCode) => {
       }
     );
     console.log("ending execution.......................................")
-    console.log("Response", response.data)
-    console.log("User Errors:", response.data?.data?.discountCodeBasicCreate)
-    console.log("User Errors:", response.data?.data?.discountCodeBasicCreate.userErrors)
+    console.log("Response", response.data.data)
     return uniqueCode;
 
   } catch (err) {
