@@ -21,7 +21,7 @@ module.exports = {
       },
       type: {
         allowNull: true,
-        type: Sequelize.ENUM('10%_OFF', 'FREE_DELIVERY'),
+        type: Sequelize.ENUM('WELCOME10_OFF', 'FREE_DELIVERY'),
         defaultValue: 'FREE_DELIVERY'
       },
       code:{
