@@ -125,11 +125,7 @@ export const ShopifyFreeDeliveryNL = async (uniqueCode2) => {
         startsAt: new Date().toISOString(),
         appliesOncePerCustomer: true,
         usageLimit: 1,
-        customerSelection: { all: true },
-        destinationSelection: {
-          countries: ["NL"],
-          includeRestOfWorld: false
-        }
+        customerSelection: { all: true }
       }
     };
 
