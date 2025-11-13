@@ -67,7 +67,7 @@ export const nodemailerActivationEmail = async ({ lead_name, lead_email, referra
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 25px 0 25px 0;">
                         <tr>
                             <td align="center">
-                              <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762956060/20251002_Red2Roast_DXanthopoulos_00050_ekjed8.jpg"
+                              <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1763020050/20251002_Red2Roast_DXanthopoulos_00064_fehnsx.jpg"
        alt="Red Cherries"
        width="100%" style="display:block; border:0; max-width:100%;">
 
