@@ -67,7 +67,7 @@ export const ShopifyFreeDeliveryNL = async (uniqueCode2) => {
     );
 
     console.log("Free shipping discount created successfully");
-    console.log("Response", response.data.data);
+    console.log("Response", response.data.data.discountCodeFreeShippingCreate);
     return uniqueCode2;
 
   } catch (err) {
