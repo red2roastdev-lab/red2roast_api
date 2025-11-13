@@ -140,15 +140,19 @@ export const updateLeadName = async (req, res) => {
     lead.status = "activated";
     await lead.save();
 
-    const uniqueCode = `R2R-${nanoid()}`;
-    await ShopifyWelcomeDC(uniqueCode);
+    // const uniqueCode = `R2R-${nanoid()}`;
+    const uniqueCode2 = `R2R-${nanoid()}`
+
 
     // Give 10% coupon
     await Coupon.create({
       lead_id: lead.id,
       type: "WELCOME10_OFF",
-      code: uniqueCode
+      code: uniqueCode2
     });
+
+    // await ShopifyWelcomeDC(uniqueCode);
+    await ShopifyFreeDeliveryNL(uniqueCode2)
 
 
     // Fetch the coupon we just created
@@ -162,14 +166,18 @@ export const updateLeadName = async (req, res) => {
 
     //Give the referrer a FREE_DELIVERY Coupon if this user was reffered
     if (lead.referral_source_id) {
-      const uniqueCode2 = `R2R-${nanoid()}`
-      await ShopifyFreeDeliveryNL(uniqueCode2)
+
+    // const uniqueCode2 = `R2R-${nanoid()}`
 
       await Coupon.create({
         lead_id: lead.referral_source_id,
         type: "FREE_DELIVERY",
         code: uniqueCode2
       })
+
+
+      // await ShopifyFreeDeliveryNL(uniqueCode2)
+
     }
 
     // Activation Email: Fire-and-forget async call
@@ -186,7 +194,15 @@ export const updateLeadName = async (req, res) => {
       }
     })();
     
-    syncLeadToShopify(lead);
+    //Sync to Shopify
+    // await syncLeadToShopify(lead);
+    (async () => {
+      try {
+        await syncLeadToShopify(lead);
+      } catch (syncErr) {
+        console.error("Failed to sync lead to Shopify:", syncErr.message);
+      }
+    })();
 
     res.json({ message: "Name updated and 10% coupon activated", lead });
   } catch (err) {
