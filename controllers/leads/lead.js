@@ -140,20 +140,16 @@ export const updateLeadName = async (req, res) => {
     lead.status = "activated";
     await lead.save();
 
-    // const uniqueCode = `R2R-${nanoid()}`;
-    const uniqueCode2 = `R2R-${nanoid()}`
-
+    const uniqueCode = `R2R-${nanoid()}`;
 
     // Give 10% coupon
     await Coupon.create({
       lead_id: lead.id,
       type: "WELCOME10_OFF",
-      code: uniqueCode2
+      code: uniqueCode
     });
 
-    // await ShopifyWelcomeDC(uniqueCode);
-    await ShopifyFreeDeliveryNL(uniqueCode2)
-
+    await ShopifyWelcomeDC(uniqueCode);
 
     // Fetch the coupon we just created
     const leadCoupon = await Coupon.findOne({
@@ -167,17 +163,14 @@ export const updateLeadName = async (req, res) => {
     //Give the referrer a FREE_DELIVERY Coupon if this user was reffered
     if (lead.referral_source_id) {
 
-    // const uniqueCode2 = `R2R-${nanoid()}`
+    const uniqueCode2 = `R2R-${nanoid()}`
 
       await Coupon.create({
         lead_id: lead.referral_source_id,
         type: "FREE_DELIVERY",
         code: uniqueCode2
       })
-
-
-      // await ShopifyFreeDeliveryNL(uniqueCode2)
-
+      await ShopifyFreeDeliveryNL(uniqueCode2)
     }
 
     // Activation Email: Fire-and-forget async call

@@ -130,9 +130,9 @@ export const ShopifyFreeDeliveryNL = async (uniqueCode2) => {
     };
 
     console.log("=== DEBUG INFO ===");
-    console.log("GraphQL URI:", process.env.SHOPIFY_GQL_URI);
+    // console.log("GraphQL URI:", process.env.SHOPIFY_GQL_URI);
     console.log("Code:", uniqueCode2);
-    console.log("Variables:", JSON.stringify(variables, null, 2));
+    // console.log("Variables:", JSON.stringify(variables, null, 2));
     
     const response = await axios.post(
       `${process.env.SHOPIFY_GQL_URI}`,
@@ -150,7 +150,7 @@ export const ShopifyFreeDeliveryNL = async (uniqueCode2) => {
 
     console.log("=== FULL RESPONSE ===");
     console.log("Status:", response.status);
-    console.log("Response:", JSON.stringify(response.data, null, 2));
+    // console.log("Response:", JSON.stringify(response.data, null, 2));
 
     // Check if response.data exists
     if (!response.data) {
@@ -167,7 +167,7 @@ export const ShopifyFreeDeliveryNL = async (uniqueCode2) => {
     // Check if data object exists
     if (!response.data.data) {
       console.error("No data.data in response");
-      console.log("Full response.data:", JSON.stringify(response.data, null, 2));
+      // console.log("Full response.data:", JSON.stringify(response.data, null, 2));
       return null;
     }
 
@@ -181,8 +181,8 @@ export const ShopifyFreeDeliveryNL = async (uniqueCode2) => {
     // Success
     const discountNode = response.data.data.discountCodeFreeShippingCreate?.codeDiscountNode;
     if (discountNode) {
-      console.log("✅ Free shipping discount created successfully");
-      console.log("Discount ID:", discountNode.id);
+      console.log("Free shipping discount created successfully");
+      // console.log("Discount ID:", discountNode.id);
       return uniqueCode2;
     } else {
       console.error("No discount node returned");
