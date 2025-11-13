@@ -45,10 +45,8 @@ export const ShopifyFreeDeliveryNL = async (uniqueCode2) => {
         usageLimit: 1,
         customerSelection: { all: true },
         destinationSelection: {
-          countries: {
             countries: ["NL"],
             includeRestOfWorld: false
-          }
         }
       }
     };
