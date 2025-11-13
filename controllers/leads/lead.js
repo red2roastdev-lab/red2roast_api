@@ -99,8 +99,12 @@ const syncLeadToShopify = async (lead) => {
           email: lead.email,
           first_name: firstName,
           last_name: lastName,
-          accepts_marketing: true,
           note: "Lead for Red2Roast",
+          email_marketing_consent: {
+            state: "subscribed",
+            opt_in_level: "single_opt_in",
+            consent_updated_at: new Date().toISOString()
+          }
         },
       },
       {
