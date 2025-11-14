@@ -36,7 +36,7 @@ app.use(cors({
 }));
 
 // Explicitly handle OPTIONS preflight requests
-app.options('/api/*', (req, res) => {
+app.options('/{*all}', (req, res) => {
   res.header('Access-Control-Allow-Origin', allowedOrigins.includes(req.headers.origin) ? req.headers.origin : '');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
