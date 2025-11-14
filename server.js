@@ -29,11 +29,21 @@ app.use(express.urlencoded({ extended: true }));
 
 // Enable CORS for all routes
 app.use(cors({
-    origin: ['https://red2roast.shop', 'https://red2roast.partners', 'http://localhost:5173', 'https://red2roast.net', 'http://localhost:5174'],
+    origin: ['https://red2roast.shop', 'https://red2roast.partners', 'http://localhost:5173', 'http://localhost:5174'],
     methods: ['POST', 'GET', 'DELETE', 'OPTIONS', 'PATCH'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Accept'],
 }));
+
+// Explicitly handle OPTIONS preflight requests
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', allowedOrigins.includes(req.headers.origin) ? req.headers.origin : '');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Accept');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.sendStatus(204); // No content
+});
+
 app.use("/api", routes);
 
 //Error handling middleware
