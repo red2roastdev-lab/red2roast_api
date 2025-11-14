@@ -13,7 +13,7 @@ export const nodemailerWelcomeEmail = async (lead) => {
         const activationLink = `${process.env.LIVE_HOST}/additional_information?r=${token}`;
 
         const mailOptions = {
-            from: `"Red2Roast Team" <${process.env.MC_EMAIL_SENDER}>`,
+            from: `"Red2Roast Team" <${process.env.MC_EMAIL_USER}>`,
             to: email,
             subject: "Welcome to Red2Roast!",
             html: `
