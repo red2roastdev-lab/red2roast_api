@@ -57,13 +57,13 @@ export const createLead = async (req, res) => {
     });
 
     // Fire-and-forget async call
-    (async () => {
-      try {
-        await nodemailerWelcomeEmail(lead);
-      } catch (err) {
-        console.error("Failed to send welcome email:", err.message);
-      }
-    })();
+    // (async () => {
+    //   try {
+    //     await nodemailerWelcomeEmail(lead);
+    //   } catch (err) {
+    //     console.error("Failed to send welcome email:", err.message);
+    //   }
+    // })();
 
     return res.status(201).json({
       status: "success",
