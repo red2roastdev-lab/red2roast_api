@@ -272,7 +272,7 @@ export const handleReferredFriend = async (req, res) => {
       return res.status(404).json({ message: "Referrer not found" });
     }
 
-    const referral = Referral.create({
+    const referral = await Referral.create({
       referrer_id: lead.id,
       referred_email: friendEmail
     });
