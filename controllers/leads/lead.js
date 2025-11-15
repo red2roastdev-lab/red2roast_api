@@ -108,12 +108,12 @@ export const createLead = async (req, res) => {
 
     // Save WelcomeCoupon code to shopify
     await ShopifyWelcomeDC(uniqueCode);
-    
+
     //For referred leads
-    if(lead.referral_source_id) {
+    if (lead.referral_source_id) {
       const uniqueCode2 = `R2R-${nanoid()}`
 
-       const deliveryCoupon = await Coupon.create({
+      const deliveryCoupon = await Coupon.create({
         lead_id: lead.referral_source_id,
         type: "FREE_DELIVERY",
         code: uniqueCode2
@@ -147,7 +147,7 @@ export const createLead = async (req, res) => {
         console.error("Failed to sync lead to Shopify:", syncErr.message);
       }
     })();
-    
+
 
     return res.status(201).json({
       status: "success",
@@ -209,7 +209,7 @@ export const updateLeadName = async (req, res) => {
     //Give the referrer a FREE_DELIVERY Coupon if this user was reffered
     if (lead.referral_source_id) {
 
-    const uniqueCode2 = `R2R-${nanoid()}`
+      const uniqueCode2 = `R2R-${nanoid()}`
 
       await Coupon.create({
         lead_id: lead.referral_source_id,
@@ -232,7 +232,7 @@ export const updateLeadName = async (req, res) => {
         console.error("Failed to send welcome email:", err.message);
       }
     })();
-    
+
     //Sync to Shopify
     // await syncLeadToShopify(lead);
     (async () => {
@@ -263,6 +263,10 @@ export const handleReferredFriend = async (req, res) => {
   try {
     const { friendEmail, referralCode } = req.body;
 
+    if (!friendEmail || !referralCode) {
+      return res.status(400).json({ message: "Missing friend email or referral code" });
+    }
+
     // Find the lead who is referring
     const lead = await Lead.findOne({ where: { referral_code: referralCode } });
 
@@ -272,26 +276,47 @@ export const handleReferredFriend = async (req, res) => {
       return res.status(404).json({ message: "Referrer not found" });
     }
 
-    const referral = await Referral.create({
-      referrer_id: lead.id,
-      referred_email: friendEmail
+    // Check if THIS referrer already referred this specific email
+    const existingReferral = await Referral.findOne({
+      where: {
+        referred_email: friendEmail,
+        referrer_id: lead.id,
+      }
     });
 
-    console.log("This is a referral", referral)
+    if (existingReferral) {
+      return res.status(409).json({ message: "This friend has already been referred by you" });
+    }
+
+    //create new referral entry
+    const referral = await Referral.create({
+      referrer_id: lead.id,
+      referred_email: friendEmail,
+      status: "pending"
+    });
 
     // send referral email
-    (async () => {
-      try {
-        await ReferralEmail({
+    // (async () => {
+    //   try {
+    //     await ReferralEmail({
+    //   friend_email: friendEmail,
+    //   referrer_name: lead.name,
+    //   referral_code: referralCode
+    // });
+
+    //   } catch (err) {
+    //     console.error("Failed to send welcome email:", err.message);
+    //   }
+    // })();
+
+    // FIRE AND FORGET – safe version
+    ReferralEmail({
       friend_email: friendEmail,
       referrer_name: lead.name,
       referral_code: referralCode
-    });
-
-      } catch (err) {
-        console.error("Failed to send welcome email:", err.message);
-      }
-    })();
+    })
+      .then(() => console.log("Referral email sent"))
+      .catch(err => console.error("Failed to send referral email:", err.message));
 
     return res.json({ message: "Referral invite sent successfully" });
 
