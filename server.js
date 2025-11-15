@@ -39,7 +39,7 @@ app.use(
 );
 
 // FIXED preflight handler
-app.options("/:all*", (req, res) => {
+app.options("/{*all}", (req, res) => {
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
