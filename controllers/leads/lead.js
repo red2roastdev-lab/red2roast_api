@@ -296,27 +296,27 @@ export const handleReferredFriend = async (req, res) => {
     });
 
     // send referral email
-    // (async () => {
-    //   try {
-    //     await ReferralEmail({
-    //   friend_email: friendEmail,
-    //   referrer_name: lead.name,
-    //   referral_code: referralCode
-    // });
-
-    //   } catch (err) {
-    //     console.error("Failed to send welcome email:", err.message);
-    //   }
-    // })();
-
-    // FIRE AND FORGET – safe version
-    ReferralEmail({
+    (async () => {
+      try {
+        await ReferralEmail({
       friend_email: friendEmail,
       referrer_name: lead.name,
       referral_code: referralCode
-    })
-      .then(() => console.log("Referral email sent"))
-      .catch(err => console.error("Failed to send referral email:", err.message));
+    });
+
+      } catch (err) {
+        console.error("Failed to send welcome email:", err.message);
+      }
+    })();
+
+    // FIRE AND FORGET – safe version
+    // ReferralEmail({
+    //   friend_email: friendEmail,
+    //   referrer_name: lead.name,
+    //   referral_code: referralCode
+    // })
+    //   .then(() => console.log("Referral email sent"))
+    //   .catch(err => console.error("Failed to send referral email:", err.message));
 
     return res.json({ message: "Referral invite sent successfully" });
 
