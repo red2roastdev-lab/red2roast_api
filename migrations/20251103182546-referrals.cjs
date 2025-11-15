@@ -22,9 +22,9 @@ module.exports = {
         onDelete: 'CASCADE'
       },
 
-      referral_code: {
+      referred_email: {
         allowNull: false,
-        type: Sequelize.STRING(8)
+        type: Sequelize.STRING
       },
 
       status: {

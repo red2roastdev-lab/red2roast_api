@@ -2,17 +2,17 @@ import transporter from "../middleswares/emailTransporterMC.js";
 import { generateActivationToken } from "../utils/tokenUtils.js";
 
 // Function to send the welcome email
-export const ReferralEmail = async ({friend_email, referrer_name, referral_code}) => {
+export const ReferralEmail = async (referrerName, referralCode, friendEmail) => {
     try {
 
         //create token to use instead of email
 
         //Dynamic links
-        const referralLink = `${process.env.LIVE_HOST}/?ref=${referral_code}`;
+        const referralLink = `${process.env.LIVE_HOST}/?ref=${referralCode}`;
 
         const mailOptions = {
             from: `"Red2Roast Team" <${process.env.MC_EMAIL_USER}>`,
-            to: friend_email,
+            to: friendEmail,
             subject: "Welcome to Red2Roast!",
             html: `
          <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -44,22 +44,22 @@ style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; bo
   <tr>
     <td style="padding: 40px 35px; font-size:16px; line-height:26px; color:#333;">
 
-      <p style="margin:0 0 18px 0;">Hello Coffee Lover,</p>
+      <p style="margin:0 0 18px 0;">Hello,</p>
 
       <p style="margin:0 0 18px 0;">
-        Good news! Your friend <strong>${referrer_name}</strong> thought you'd love their favourite coffee source and sent you a welcome gift.
+        <strong>${referrerName}</strong> thought you might enjoy being part of something meaningful,  a growing circle of people who love thoughtful, high-quality coffee and the connection that comes with it.
       </p>
 
       <p style="margin:0 0 18px 0;">
-        ${referrer_name} is part of the Red2Roast family, supporting the incredible farmers in the rwenzori Mountains and connecting directly to some of the world'e best specialty coffee, right hre in the Netherlands.
+        At Red2Roast, we partner directly with smallholder farmers in the Rwenzori Mountains of Uganda. Each batch is carefully processed and roasted with intention; preserving the craft, the culture, and the livelihoods behind every cup.
       </p>
+
+      <h3 style="margin:30px 0 12px 0; font-size:20px; color:#000;">
+        Be part of the journey 
+      </h3>
 
       <p style="margin:0 0 24px 0;">
-        To welcome you, we've reserved a special 10% OFF voucher for your first purchase. We value the connection your friend made!
-      </p>
-
- <p style="margin:0 0 24px 0;">
-        Your personalized discount is waiting. Click below to activate it now and start browsing our direct-source coffee.
+        Joining our priority list means you’ll receive early access to our micro-lot releases, intimate coffee events, and personal stories from the communities that grow this coffee.
       </p>
 
       <!-- CTA BUTTON -->
@@ -69,7 +69,7 @@ style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; bo
           style="border-radius:6px; padding:0;">
             <a href="${referralLink}" target="_blank"
             style="display:inline-block; padding:12px 28px; font-weight:bold; color:#ffffff; text-decoration:none;">
-              ACTIVATE YOUR 10% DISCOUNT
+              Join the Red2Roast Priority List
             </a>
           </td>
         </tr>
@@ -114,6 +114,8 @@ style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; bo
 </body>
 
 </html>
+
+
       `,
         };
 

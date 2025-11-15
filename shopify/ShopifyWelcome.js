@@ -72,7 +72,7 @@ export const ShopifyWelcomeDC = async (uniqueCode) => {
     return uniqueCode;
 
   } catch (err) {
-    console.error("Shopify Discount Code creation failed:");
+    console.error("Shopify Welcome Discount Code creation failed:");
     console.error("Full error:", err);
     console.error("Response data:", err.response?.data);
     console.error("Response status:", err.response?.status);

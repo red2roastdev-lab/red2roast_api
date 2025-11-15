@@ -16,8 +16,8 @@ const Referral = db.define(
         key: "id",
       },
     },
-    referral_code: {
-      type: DataTypes.STRING(8),
+    referred_email: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     status: {

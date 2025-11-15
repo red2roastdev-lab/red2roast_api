@@ -2,14 +2,19 @@ import transporter from "../middleswares/emailTransporterMC.js";
 import { generateActivationToken } from "../utils/tokenUtils.js";
 
 // Function to send the welcome email
-export const nodemailerWelcomeEmail = async ({ lead_name, lead_email, referral_code, coupon_code }) => {
+export const nodemailerWelcomeEmail = async (lead) => {
     try {
+        const { email } = lead;
+
+        //create token to use instead of email
+        const token = generateActivationToken({ email })
+
         //Dynamic links
-        const referralLink = `${process.env.LIVE_HOST}/refer_friend?ref=${referral_code}`;
+        const activationLink = `${process.env.LIVE_HOST}/additional_information?r=${token}`;
 
         const mailOptions = {
             from: `"Red2Roast Team" <${process.env.MC_EMAIL_USER}>`,
-            to: lead_email,
+            to: email,
             subject: "Welcome to Red2Roast!",
             html: `
                <!DOCTYPE html
@@ -108,25 +113,20 @@ export const nodemailerWelcomeEmail = async ({ lead_name, lead_email, referral_c
 
                     <!-- INTRO -->
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 25px 0;">
-                        Welcome to the Red2Roast family and thank you for choosing to connect directly with the incredible farmers of the Rwenzori Mountains. By joining us, you’re supporting the source of some of the world’s finest specialty coffee, right here in the Netherlands.
+                        Thank you for choosing to support <b>Red2Roast</b> and the incredible farmers in the Rwenzori
+                        Mountains. By signing up, you are connecting directly with the source of some of the world’s
+                        best specialty coffee, right here in the Netherlands.
                     </p>
 
                     <!-- 	PERSONALISED SECTION -->
+                    <h3 class="heading" style="font-size: 20px; line-height: 26px; margin: 0 0 2px 0; color: #000;">
+                        Your Personalised Gift Awaits!
+                    </h3>
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        To thank you for signing up, we've reserved a special 10% OFF voucher for your first purchase.
+                        We value your choice to buy directly from the source. To thank you, we've reserved a special <em><b>10% OFF
+                                voucher</b></em> for your first purchase. Activate your personalised discount and stay connected with us.
                     </p>
 
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        Use this code: <strong>${coupon_code}</strong> <br>Redeem it at checkout when our shop officialy opens soon.
-                    </p>
-
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        But that's not all...
-                    </p>
-
-                    <p style="font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                        You can also invite a friend and earn an extra free delivery voucher
-                    </p>
                     <!-- BUTTON CTA TO MICRO-PAGE -->
                     <table width="70%" cellpadding="0" cellspacing="0" border="0" style="margin: auto">
                         <tr>
@@ -135,9 +135,9 @@ export const nodemailerWelcomeEmail = async ({ lead_name, lead_email, referral_c
                                     <tr>
                                         <td align="center" style="border-radius: 6px; background-color:#aaa197;"
                                             bgcolor="#aaa197">
-                                            <a href="${referralLink}" target="_blank"
+                                            <a href="${activationLink}" target="_blank"
                                                 style="font-size: 16px; font-weight: bold; text-decoration: none; color: #ffffff; background-color: #aaa197; border: 1px solid #aaa197; padding: 12px 25px; display: inline-block; border-radius: 6px;">
-                                                Invite a friend
+                                                Activate Discount
                                             </a>
                                         </td>
                                     </tr>
@@ -146,23 +146,16 @@ export const nodemailerWelcomeEmail = async ({ lead_name, lead_email, referral_c
                         </tr>
                     </table>
 
-                    <p style="font-size: 16px; line-height: 24px; margin: 20px 0 20px 0;">
-                        We’re excited to share our journey, our coffee, and our community with you
-                    </p>
-
                     <!--  IMAGE (unCLICKABLE) -->
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 25px 0 25px 0;">
                         <tr>
                             <td align="center">
-                               <div style="width:100%; height: 300px; overflow:hidden;">
-
                                 <a href="https://vimeo.com/red2roast/yvette" target="_blank"
                                 style="display:block; position:relative; text-decoration:none; line-height:0;">
                                 <img src="https://res.cloudinary.com/dgaf0sppm/image/upload/v1762956060/20251002_Red2Roast_DXanthopoulos_00050_ekjed8.jpg"
-                                    alt="Rwenzori Mountains"
-                                    width="100%" style="display:block; border:0; max-width:100%; height:100%; width: 100%;">
+                                    alt="Watch Yvette's story"
+                                    width="100%" style="display:block; border:0; max-width:100%;">
                                 </a>
-                                    </div>
 
                             </td>
                         </tr>
@@ -187,6 +180,7 @@ export const nodemailerWelcomeEmail = async ({ lead_name, lead_email, referral_c
 </body>
 
 </html>
+   
       `,
         };
 

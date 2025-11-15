@@ -7,7 +7,7 @@ const router = Router();
 router.post("/signup", createLead);
 
 // 2. Patch lead to add name (activate 10% coupon)
-router.post("/update_name", updateLeadName);
+// router.post("/update_name", updateLeadName);
 
 // 3. Get lead by email (for frontend)
 router.get("/:email", getLeadByEmail)
