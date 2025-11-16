@@ -7,8 +7,14 @@ module.exports = {
       instances: 1
     },
     {
-      name: "email-worker",
-      script: "workers/emailWorker.js",
+      name: "welcome-email-worker",
+      script: "workers/welcomeWorker.js",
+      watch: false,
+      instances: 1
+    },
+      {
+      name: "referral-email-worker",
+      script: "workers/referralWorker.js",
       watch: false,
       instances: 1
     },

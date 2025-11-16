@@ -2,8 +2,8 @@
 const { Queue } = require("bullmq");
 const redisConnection = require("../redis.cjs"); // make sure redis.js is also CJS
 
-const emailQueue = new Queue("emailQueue", {
+const welcomeQueue = new Queue("welcomeQueue", {
     connection: redisConnection, // bullmq expects `connection` property
 });
 
-module.exports = emailQueue;
+module.exports = welcomeQueue;

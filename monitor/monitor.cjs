@@ -3,7 +3,7 @@ const express = require('express');
 const { ExpressAdapter } = require('@bull-board/express');
 const { createBullBoard } = require('@bull-board/api');
 const { BullMQAdapter } = require('@bull-board/api/bullMQAdapter');
-const emailQueue = require("../queues/emailQueue.cjs");
+const emailQueue = require("../queues/welcomeQueue.cjs");
 
 const server = express();
 const serverAdapter = new ExpressAdapter();
