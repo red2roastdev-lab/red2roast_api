@@ -5,8 +5,6 @@ import { generateActivationToken } from "../utils/tokenUtils.js";
 export const ReferralEmail = async ({friend_email, referrer_name, referral_code}) => {
     try {
 
-        //create token to use instead of email
-
         //Dynamic links
         const referralLink = `${process.env.LIVE_HOST}/?ref=${referral_code}`;
 
@@ -122,5 +120,6 @@ style="max-width: 600px; width:100%; margin:0 auto; background-color:#ffffff; bo
         console.log(`Invitation Email Sent`);
     } catch (error) {
         console.error("Error sending email notification:", error);
+        throw error;
     }
 };

@@ -2,7 +2,7 @@ import transporter from "../middleswares/emailTransporterMC.js";
 import { generateActivationToken } from "../utils/tokenUtils.js";
 
 // Function to send the welcome email
-export const nodemailerWelcomeEmail = async ({ lead_name, lead_email, referral_code, coupon_code }) => {
+export const WelcomeEmail = async ({ lead_name, lead_email, referral_code, coupon_code }) => {
     try {
         //Dynamic links
         const referralLink = `${process.env.LIVE_HOST}/refer_friend?ref=${referral_code}`;
@@ -195,5 +195,6 @@ export const nodemailerWelcomeEmail = async ({ lead_name, lead_email, referral_c
         console.log(`Welcome Email Sent`);
     } catch (error) {
         console.error("Error sending email notification:", error);
+        throw error;
     }
 };
