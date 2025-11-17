@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 import { customAlphabet } from 'nanoid';
 import { ShopifyWelcomeDC } from "../../shopify/ShopifyWelcome.js";
 import { ShopifyFreeDeliveryNL } from "../../shopify/ShopifyFreeDelivery.js";
-import welcomeQueue from "../../queues/welcomeQueue.cjs";
-import referralQueue from "../../queues/referralQueue.cjs";
 import db from "../../config/database.js";
+import { WelcomeEmail } from "../../services/WelcomeEmail.js";
+import { ReferralEmail } from "../../services/ReferralEmail.js";
 
 dotenv.config();
 const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', 6);
@@ -96,13 +96,19 @@ export const createLead = async (req, res) => {
         }, { transaction: t });
       }
 
-      // Queue welcome email
-      welcomeQueue.add("welcome", {
-        lead_name: lead.name,
-        lead_email: lead.email,
-        referral_code: lead.referral_code,
-        coupon_code: welcomeCoupon.code,
-      });
+      // Activation Email: Fire-and-forget async call
+      (async () => {
+        try {
+          await WelcomeEmail({
+            lead_name: lead.name,
+            lead_email: lead.email,
+            referral_code: lead.referral_code,
+            couponCode: leadCoupon.code,
+          });
+        } catch (err) {
+          console.error("Failed to send welcome email:", err.message);
+        }
+      })();
 
       return { lead, welcomeCoupon, deliveryCoupon };
     });
@@ -169,12 +175,18 @@ export const handleReferredFriend = async (req, res) => {
       status: "pending"
     });
 
-    // send referral email via queue
-    referralQueue.add("referral", {
-      friend_email: friendEmail,
-      referrer_name: lead.name,
-      referral_code: referralCode
-    });
+    // send referral email
+    (async () => {
+      try {
+        await ReferralEmail({
+          friend_email: friendEmail,
+          referrer_name: lead.name,
+          referral_code: referralCode
+        });
+      } catch (err) {
+        console.error("Failed to send welcome email:", err.message);
+      }
+    })();
 
     return res.json({ message: "Referral invite sent successfully" });
 

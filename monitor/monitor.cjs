@@ -3,14 +3,30 @@ const express = require('express');
 const { ExpressAdapter } = require('@bull-board/express');
 const { createBullBoard } = require('@bull-board/api');
 const { BullMQAdapter } = require('@bull-board/api/bullMQAdapter');
-const emailQueue = require("../queues/welcomeQueue.cjs");
+
+const welcomeQueue = require("../queues/welcomeQueue.cjs");
+const referralQueue = require("../queues/referralQueue.cjs");
 
 const server = express();
 const serverAdapter = new ExpressAdapter();
 serverAdapter.setBasePath('/admin/queues');
 
+
+// Create your queues
+const welcomeQueue = new Queue("welcomeQueue", {
+  connection: { host: "127.0.0.1", port: 6379 }
+});
+
+const referralQueue = new Queue("referralQueue", {
+  connection: { host: "127.0.0.1", port: 6379 }
+});
+
+// Register them both
 createBullBoard({
-  queues: [new BullMQAdapter(emailQueue)],
+  queues: [
+    new BullMQAdapter(welcomeQueue),
+    new BullMQAdapter(referralQueue),
+  ],
   serverAdapter,
 });
 
