@@ -103,7 +103,7 @@ export const WelcomeEmail = async ({ lead_name, lead_email, referral_code, coupo
                 <td class="content-padding" style="padding: 40px 30px;">
                     <!-- GREETING -->
                     <p style="font-size: 16px; line-height: 24px; margin: 0 0 15px 0;">
-                        Hello Fellow Coffee Enthusiast,
+                        Hello ${lead_name},
                     </p>
 
                     <!-- INTRO -->
