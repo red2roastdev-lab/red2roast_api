@@ -78,7 +78,7 @@ export const createLead = async (req, res) => {
         name: fullname,
         status: "activated",
         referral_source_id: referrer ? referrer.id : null,
-        user_agent: req.headers["user-agent"] || "Unknown Device",
+        user_agent: "Unknown Device",
       }, { transaction: t });
 
       const welcomeCoupon = await Coupon.create({
